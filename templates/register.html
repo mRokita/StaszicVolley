@@ -1,0 +1,65 @@
+{% extends "main.html" %}
+{% block title %}Rejestracja{% endblock %}
+{% block main %}
+    <div class="card col s12 left-align post">
+        <div class="row heading">
+            <span class="title">Rejestracja</span>
+        </div>
+        {% if not post or not success %}
+        <form method="POST" action="/register/">
+            <div class="row">
+                {% if errors %}
+                <div class="errors red accent-1">
+                {% for error in errors %}<span class="error">{{ error }}</span><br/>{% endfor %}
+                </div>
+                {% endif %}
+                {% csrf_token %}
+                <div class="input-field col s12">
+                  <input id="team_name" name="name" type="text" class="validate">
+                  <label for="team_name">Nazwa zespołu</label>
+                </div>
+
+                <div class="input-field col s12">
+                  <input id="email" type="email" name="email" class="validate">
+                  <label for="email">Adres e-mail</label>
+                </div>
+                <div id="players">
+                    {% for p in players%}
+                    <div id="player-{{ forloop.counter }}">
+                        <div class="col s12 player-head teal-text">Zawodnik<a href="javascript:removePlayer({{ forloop.counter }})"> [usuń]</a></div>
+                        <div class="input-field col s5"><input id="first_name" name="{{ forloop.counter }}-first_name" type="text" class="validate" value="{{ p.first_name }}">
+                            <label for="first_name">Imię</label>
+                        </div>
+                        <div class="input-field col s5"><input id="last_name" name="{{ forloop.counter }}-last_name" type="text" class="validate"><label for="last_name">Nazwisko</label>
+                        </div>
+                        <div class="input-field col s2"><input id="class" name="{{ forloop.counter }}-class" type="text" class="validate"><label for="class">Klasa</label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="add-player teal-text" href="javascript:addPlayer()">Dodaj zawodnika rezerwy</a>
+                <div class="input-field col s12 red-text"><br/>Rejestracja zespołu oznacza akceptację regulaminu</div>
+                <div class="input-field col s12"><button type="submit" class="btn green right">Zarejestruj</button></div>
+
+            </div>
+        {% elif success %}
+            Sukces
+        {% else %}
+        {% endif %}
+        </form>
+    </div>
+    <script type="text/javascript">
+        var count = 1+{{ players|length }};
+        var total = {{ players|length }};
+        function addPlayer(){
+            document.getElementById("players").innerHTML += '<div id="player-'+count+'"><div class="col s12 player-head teal-text">Zawodnik<a href="javascript:removePlayer('+count+')"> [usuń]</a></div><div class="input-field col s5"><input id="first_name" name="'+count+'-first_name" type="text" class="validate"><label for="first_name">Imię</label> </div><div class="input-field col s5"><input id="last_name" name="'+count+'-last_name" type="text" class="validate"><label for="last_name">Nazwisko</label></div><div class="input-field col s2"><input id="class" name="'+count+'-class"type="text" class="validate"><label for="class">Klasa</label></div></div>';
+            count++;
+            total++;
+        }
+        function removePlayer(id){
+            if(total<=3) return;
+            document.getElementById("player-"+id).remove();
+            total--;
+        }
+    </script>
+{% endblock %}

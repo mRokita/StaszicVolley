@@ -1,0 +1,91 @@
+body {
+    background: linear-gradient(rgba(0, 100, 0, 0.5), rgba(0, 100, 0, 0.5))
+}
+
+#activator {
+    position: fixed;
+    top: 10px;
+    left: 30px;
+    background-color: rgba(0, 100, 0, 0.5);
+    padding: 10px;
+    padding-bottom: 4px;
+    z-index: 2;
+    color: white;
+    text-align: center
+}
+.post {
+    padding: 20px;
+    padding-bottom: 0px;
+}
+
+.post .heading {
+    margin: 0;
+}
+
+.post .title {
+    float: left;
+    font-size: 40px;
+    padding: 5px;
+}
+
+.post .time {
+    float: right;
+    margin-top:20px;
+    padding: 5px;
+}
+
+.player-head {
+    margin-top: 20px;
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+.errors {
+    margin-left: 10px;
+    padding: 5px;
+}
+.add-player {
+    padding-left: 10px;
+    color: #090;
+}
+.userView {
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.9),
+            rgba(0, 0, 0, 0.2)
+    ), url('http://www.livemint.com/rf/Image-621x414/LiveMint/Period1/2015/10/17/Photos/volleyball-kehF--621x414@LiveMint.jpg');
+    background-size: cover;
+}
+
+main {
+    padding-left: 300px;
+
+}
+
+@media only screen and (max-width: 992px) {
+    main, footer {
+        padding-left: 0;
+    }
+}
+
+.header-main {
+    height: 200px;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.4)
+    ), url('/static/images/background.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.header-main > h1 {
+    padding-top: 20px;
+    text-shadow: 2px 2px #999;
+    font-size: 100px;
+}
+
+@media only screen and (max-width: 992px) {
+    .header-main > h1 {
+        font-size: 60px;
+        padding-top: 40px;
+    }
+}

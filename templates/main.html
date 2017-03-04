@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block body %}
+    <a id="activator" data-activates="slide-out" class="button-collapse hide-on-large-only"><i
+            class="material-icons">menu</i></a>
+    <main class="row">
+        <ul id="slide-out" class="side-nav fixed">
+            <li>
+                <div class="userView grey" style="padding:0;">
+                    <a href="/" style="padding-top: 30px; padding-bottom:30px;"><span class="white-text name center-align">
+                        <h4 style="text-shadow: 2px 2px #999;">{% block title %}Aktualności{% endblock %}</h4></span></a>
+    {#                <a><span class="white-text email right-align"></span></a>#}
+                </div>
+            </li>
+            <li><a class="subheader">Menu</a></li>
+
+            {% include "menu.html" %}
+            <li class="divider"></li>
+        </ul>
+
+        <div class="row">
+            <div class="col s12 center-align white-text">
+                <div class="col s12 header-main">
+                <h1>volley.staszic</h1>
+                </div>
+            </div>
+            <div class="col s12 l8 m8 row" style="padding: 0;">
+                <div class="col s12 main">
+                {% block main %}
+
+                {% endblock %}
+                </div>
+            </div>
+            <div class="col s12 l4 m4 right">
+                {% block cards %}
+                <div class="card col s12 row" style="padding: 0">
+                    <div class="card green center-align white-text" style="border-radius: 0; padding: 0; margin: 0;"><h3 style="padding: 0;margin:0;">Terminarz</h3></div>
+                    <div class="col s12">
+                        <ul>
+                        <li>Turniej "marcowy" - 25 marca 2017</li>
+                        <li>Turniej "kwietniowy" - 22 kwietnia 2017</li>
+                        <li>Turniej "majowy" - 27 maja 2017</li>
+                        <li>Turniej "czerwcowy" - 10 czerwca 2017</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- tu będzie ranking -->
+                {% endblock %}
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#activator").sideNav();
+            });
+        </script>
+    </main>
+{% endblock %}

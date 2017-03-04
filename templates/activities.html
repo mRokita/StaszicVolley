@@ -1,0 +1,6 @@
+{% extends 'main.html' %}
+{% block main %}
+    {% for post in posts%}
+        {% include "post.html" with title=post.title content=post.content time=post.date_created %}
+    {% endfor %}
+{% endblock %}
