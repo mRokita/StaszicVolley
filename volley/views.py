@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.core.mail import EmailMessage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
@@ -74,6 +75,8 @@ class RegisterView(TemplateView):
         context['players'] = [p[1] for p in sorted(mp)]
         context['email'] = email
         context['name'] = data['name'][0]
+        email = EmailMessage('Rejestracja', 'Zarejestrowano zespół', to=['mrokita@mrokita.pl'])
+        email.send()
         return super(RegisterView, self).render_to_response(context)
 
     def __search_safe(self, pattern, string):

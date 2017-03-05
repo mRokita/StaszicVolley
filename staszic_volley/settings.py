@@ -70,7 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'staszic_volley.wsgi.application'
-
+EMAIL_BACKEND = 'volley.mail.EmailBackend'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
