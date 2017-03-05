@@ -51,7 +51,7 @@ body {
     background: linear-gradient(
             rgba(0, 0, 0, 0.9),
             rgba(0, 0, 0, 0.2)
-    ), url('http://www.livemint.com/rf/Image-621x414/LiveMint/Period1/2015/10/17/Photos/volleyball-kehF--621x414@LiveMint.jpg');
+    ), url('/static/images/userview.jpg');
     background-size: cover;
 }
 
