@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.core.mail import EmailMessage
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -29,6 +30,17 @@ class Team(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def __init__(self, *args, **kwargs):
+        super(Team, self).__init__(*args, **kwargs)
+        self.__original_verified = self.vrified
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        if self.verified != self.__original_verified and self.verified == True:
+            email = EmailMessage('staszic.volley - weryfikacja zespołu', 'Twój zespół został zweryfikowany przez moderatora.\nWszystkie wiadomości dotyczące turnieju będą się pojawiały na https://volley.staszic.waw.pl\n\nPozdrawiamy,\nZespół volley.staszic', to=[self.email], from_email='volley@staszic.waw.pl')
+            email.send()
+        super(Team, self).save(force_insert, force_update, *args, **kwargs)
+        self.__original_verified = self.verified
 
 
 class Post(models.Model):
