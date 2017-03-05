@@ -7,9 +7,14 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Player(models.Model):
+    SCHOOL_CHOICES = (
+        ('liceum', 'Liceum'),
+        ('gimnazjum', 'Gimnazjum')
+    )
     first_name = models.CharField(max_length=20, verbose_name=_('Imię'))
     last_name = models.CharField(max_length=20, verbose_name=_('Nazwisko'))
     school_class = models.CharField(max_length=2, verbose_name=_('Klasa'))
+    school = models.CharField(max_length=10, verbose_name=_('Szkoła'), choices=SCHOOL_CHOICES)
     team = models.ForeignKey('Team')
 
     class Meta:

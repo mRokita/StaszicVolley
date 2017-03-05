@@ -25,8 +25,9 @@ SECRET_KEY = 'q4gt$*wvd1g3y99z2yz8^^%^y#s6#ncsnj-5ngdj@itsymtcr3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['volley.staszic.waw.pl', 'localhost']
 
+RECAPTCHA_SECRET = 'none'
 
 # Application definition
 

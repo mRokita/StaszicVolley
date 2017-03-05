@@ -1,5 +1,6 @@
 {% extends "main.html" %}
 {% block title %}Rejestracja{% endblock %}
+{% block head %}<script src='https://www.google.com/recaptcha/api.js'></script>{% endblock %}
 {% block main %}
     <div class="card col s12 left-align post">
         <div class="row heading">
@@ -27,20 +28,31 @@
                     {% for p in players%}
                     <div id="player-{{ forloop.counter }}">
                         <div class="col s12 player-head teal-text">Zawodnik<a href="javascript:removePlayer({{ forloop.counter }})"> [usuń]</a></div>
-                        <div class="input-field col s5"><input id="first_name" name="{{ forloop.counter }}-first_name" type="text" class="validate" value="{{ p.first_name }}">
+                        <div class="input-field col s6 l4"><input id="first_name" name="{{ forloop.counter }}-first_name" type="text" class="validate" value="{{ p.first_name }}">
                             <label for="first_name">Imię</label>
                         </div>
-                        <div class="input-field col s5"><input id="last_name" name="{{ forloop.counter }}-last_name" type="text" class="validate" value="{{ p.last_name }}">
+                        <div class="input-field col s6 l4"><input id="last_name" name="{{ forloop.counter }}-last_name" type="text" class="validate" value="{{ p.last_name }}">
                             <label for="last_name">Nazwisko</label>
                         </div>
-                        <div class="input-field col s2"><input id="class" name="{{ forloop.counter }}-class" type="text" class="validate" value="{{ p.class }}">
+                        <div class="input-field col s8 l2">
+                            <select id="school" name="{{ forloop.counter }}-school">
+                                <option value="liceum" {% ifequal p.school 'liceum' %}selected{% endifequal %}>Liceum</option>
+                                <option value="gimnazjum" {% ifnotequal p.school 'liceum' %}selected{%endifnotequal%}>Gimnazjum</option>
+                            </select>
+                            <label for="school">Szkoła</label>
+                        </div>
+                        <div class="input-field col s4 l2"><input id="class" name="{{ forloop.counter }}-class" type="text" class="validate" value="{{ p.class }}">
                             <label for="class">Klasa</label>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
                 <a class="add-player teal-text" href="javascript:addPlayer()">Dodaj zawodnika rezerwy</a>
-                <div class="input-field col s12 red-text"><br/>Rejestracja zespołu oznacza akceptację regulaminu</div>
+                <div class="input-field col s12 red-text right-align">Rejestracja zespołu oznacza akceptację regulaminu</div>
+                <div class="col s12">
+                    <br/>
+                    <div class="g-recaptcha right" data-sitekey="6LemtRcUAAAAAAaq3WJ9Wlz76j-AJdqJbHAQElAK"></div>
+                </div>
                 <div class="input-field col s12"><button type="submit" class="btn green right">Zarejestruj</button></div>
 
             </div>
@@ -51,10 +63,46 @@
         </form>
     </div>
     <script type="text/javascript">
+        if (!String.prototype.format) {
+          String.prototype.format = function() {
+            var args = arguments;
+            return this.replace(/{(\d+)}/g, function(match, number) {
+              return typeof args[number] != 'undefined'
+                ? args[number]
+                : match
+              ;
+            });
+          };
+        }
+        var player = `<div id="player-{0}">
+                        <div class="col s12 player-head teal-text">Zawodnik<a href="javascript:removePlayer({0})"> [usuń]</a></div>
+                        <div class="input-field col s6 l4"><input id="first_name" name="{0}-first_name" type="text" class="validate">
+                            <label for="first_name">Imię</label>
+                        </div>
+                        <div class="input-field col s6 l4"><input id="last_name" name="{0}-last_name" type="text" class="validate">
+                            <label for="last_name">Nazwisko</label>
+                        </div>
+                        <div class="input-field col s8 l2">
+                            <select id="school" name="{0}-school">
+                                <option value="liceum" selected>Liceum</option>
+                                <option value="gimnazjum">Gimnazjum</option>
+                            </select>
+                            <label for="school">Szkoła</label>
+                        </div>
+                        <div class="input-field col s4 l2"><input id="class" name="{0}-class" type="text" class="validate">
+                            <label for="class">Klasa</label>
+                        </div>
+                    </div>
+        `;
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+
         var count = 1+{{ players|length }};
         var total = {{ players|length }};
         function addPlayer(){
-            document.getElementById("players").innerHTML += '<div id="player-'+count+'"><div class="col s12 player-head teal-text">Zawodnik<a href="javascript:removePlayer('+count+')"> [usuń]</a></div><div class="input-field col s5"><input id="first_name" name="'+count+'-first_name" type="text" class="validate"><label for="first_name">Imię</label> </div><div class="input-field col s5"><input id="last_name" name="'+count+'-last_name" type="text" class="validate"><label for="last_name">Nazwisko</label></div><div class="input-field col s2"><input id="class" name="'+count+'-class"type="text" class="validate"><label for="class">Klasa</label></div></div>';
+            document.getElementById("players").innerHTML += player.format(count);
+            $(('#player-' +count+ ' select')).material_select();
             count++;
             total++;
         }
