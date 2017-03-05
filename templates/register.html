@@ -15,12 +15,12 @@
                 {% endif %}
                 {% csrf_token %}
                 <div class="input-field col s12">
-                  <input id="team_name" name="name" type="text" class="validate">
+                  <input id="team_name" name="name" value="{{ name }}" type="text" class="validate">
                   <label for="team_name">Nazwa zespołu</label>
                 </div>
 
                 <div class="input-field col s12">
-                  <input id="email" type="email" name="email" class="validate">
+                  <input id="email" value="{{ email }}" type="email" name="email" class="validate">
                   <label for="email">Adres e-mail</label>
                 </div>
                 <div id="players">
