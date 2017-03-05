@@ -33,7 +33,7 @@ class Team(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Team, self).__init__(*args, **kwargs)
-        self.__original_verified = self.vrified
+        self.__original_verified = self.verified
 
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         if self.verified != self.__original_verified and self.verified == True:
