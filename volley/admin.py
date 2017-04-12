@@ -19,6 +19,16 @@ class TeamAdmin(ModelAdmin):
 class MatchAdmin(ModelAdmin):
     list_display = ['team_a', 'team_b', 'score_a', 'score_b']
     fields = ['team_a', 'team_b', 'score_a', 'score_b']
+    readonly_fields = ['rank']
+
+    def rank(self, obj):
+        points = 0
+        for m in Match.objects.filter(team_a=obj):
+            points += m.team_a - m.team_b
+        for m in Match.objects.filter(team_b=obj):
+            points += m.team_b - m.team_a
+        return points
+
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Team, TeamAdmin)
