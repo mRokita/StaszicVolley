@@ -48,6 +48,13 @@ class Team(models.Model):
         self.__original_verified = self.verified
 
 
+class Match(models.Model):
+    team_a = models.ForeignKey(verbose_name=_('Zespół A'), to=Team, related_name='team_a')
+    team_b = models.ForeignKey(verbose_name=_('Zespół B'), to=Team, related_name='team_b')
+    score_a = models.IntegerField(verbose_name=_('Punkty zespołu A'))
+    score_b = models.IntegerField(verbose_name=_('Punkty zespołu B'))
+
+
 class Post(models.Model):
     date_created = models.DateTimeField(verbose_name=_('Data utworzenia'))
     title = models.CharField(max_length = 200, verbose_name=_('Tytuł'))
