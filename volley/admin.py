@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from django.contrib.admin import ModelAdmin
 
-from volley.models import Post, Team, Player
+from volley.models import Post, Team, Player, Match
 
 
 class PostAdmin(ModelAdmin):
@@ -16,5 +16,9 @@ class PlayerInline(admin.StackedInline):
 class TeamAdmin(ModelAdmin):
     inlines = [PlayerInline]
 
+class MatchAdmin(ModelAdmin):
+    fields = ['team_a', 'team_b', 'score_a', 'score_b']
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Team, TeamAdmin)
+admin.site.register(Match, MatchAdmin)
