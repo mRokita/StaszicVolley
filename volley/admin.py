@@ -17,6 +17,7 @@ class TeamAdmin(ModelAdmin):
     inlines = [PlayerInline]
 
 class MatchAdmin(ModelAdmin):
+    list_display = ['team_a', 'team_b', 'score_a', 'score_b']
     fields = ['team_a', 'team_b', 'score_a', 'score_b']
 
 admin.site.register(Post, PostAdmin)
