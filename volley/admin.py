@@ -18,7 +18,6 @@ class TeamAdmin(ModelAdmin):
 
 class MatchAdmin(ModelAdmin):
     list_display = ['team_a', 'team_b', 'score_a', 'score_b', 'rank']
-    fields = ['team_a', 'team_b', 'score_a', 'score_b', 'rank']
     readonly_fields = ['rank']
 
     def rank(self, obj):
