@@ -17,8 +17,8 @@ class TeamAdmin(ModelAdmin):
     inlines = [PlayerInline]
 
 class MatchAdmin(ModelAdmin):
-    list_display = ['team_a', 'team_b', 'score_a', 'score_b']
-    fields = ['team_a', 'team_b', 'score_a', 'score_b']
+    list_display = ['team_a', 'team_b', 'score_a', 'score_b', 'rank']
+    fields = ['team_a', 'team_b', 'score_a', 'score_b', 'rank']
     readonly_fields = ['rank']
 
     def rank(self, obj):
