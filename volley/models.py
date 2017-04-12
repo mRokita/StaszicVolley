@@ -58,9 +58,6 @@ class Match(models.Model):
         verbose_name = _('Mecz')
         verbose_name_plural = _('Mecze')
 
-    def __unicode__(self):
-        return u'%s vs %s' % (self.team_a, self.team_b)
-
 
 class Post(models.Model):
     date_created = models.DateTimeField(verbose_name=_('Data utworzenia'))
