@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+{% block title %}Ranking{% endblock %}
+{% block main %}
+    <div class="card col s12 left-align post">
+        <div class="row heading">
+            <span class="title">Ranking</span>
+        </div>
+        <table class="highlight responsive-table">
+            <thead>
+                <tr>
+                    <th>Pozycja</th>
+                    <th>Zespół</th>
+                    <th>Mecze</th>
+                    <th>Punkty</th>
+                </tr>
+            </thead>
+            {% for team in teams %}
+            <tr><td>{{ forloop.counter }}</td><td>{{ team.name }}</td><td>{{ team.matches|length }}</td><td>{{ team.get_rank }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

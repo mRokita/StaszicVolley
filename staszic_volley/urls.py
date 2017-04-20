@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from volley.views import ActivitiesView, RulesView, RegisterView
+from volley.views import ActivitiesView, RulesView, RegisterView, RankingView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', ActivitiesView.as_view()),
     url(r'^rules/?$', RulesView.as_view()),
     url(r'^register/?$', RegisterView.as_view()),
+    url(r'^ranking/?$', RankingView.as_view())
 ]
