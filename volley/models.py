@@ -79,7 +79,7 @@ class Post(models.Model):
         verbose_name_plural = _('Posty')
 
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
-        email = EmailMessage('staszic.volley - '+self.title, self.content+'\n\nPozdrawiamy,\nZespół volley.staszic', to=[t.email for t in Team.objets.all()], from_email='volley@staszic.waw.pl')
+        email = EmailMessage('staszic.volley - '+self.title, self.content+'\n\nPozdrawiamy,\nZespół volley.staszic', to=[t.email for t in Team.objects.all()], from_email='volley@staszic.waw.pl')
         email.send()
         super(Team).save(force_insert, force_update, *args, **kwargs)
         self.__original_verified = self.verified
