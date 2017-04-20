@@ -41,6 +41,9 @@ class Team(models.Model):
             points += m.score_b - m.score_a
         return points
 
+    def get_match_count(self):
+        return len(Match.objects.filter(team_a=self)) + len(Match.objects.filter(team_b=self))
+
     def __unicode__(self):
         return self.name
 

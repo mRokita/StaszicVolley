@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             {% for team in teams %}
-            <tr><td>{{ forloop.counter }}</td><td>{{ team.name }}</td><td>{{ team.matches|length }}</td><td>{{ team.get_rank }}</td></tr>
+            <tr><td>{{ forloop.counter }}</td><td>{{ team.name }}</td><td>{{ team.get_match_count }}</td><td>{{ team.get_rank }}</td></tr>
             {% endfor %}
         </table>
     </div>
