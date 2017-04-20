@@ -82,7 +82,6 @@ class Post(models.Model):
         email = EmailMessage('staszic.volley - '+self.title, self.content+'\n\nPozdrawiamy,\nZespół volley.staszic', to=[t.email for t in Team.objects.all()], from_email='volley@staszic.waw.pl')
         email.send()
         super(Post, self).save(force_insert, force_update, *args, **kwargs)
-        self.__original_verified = self.verified
 
     def __unicode__(self):
         return self.title
