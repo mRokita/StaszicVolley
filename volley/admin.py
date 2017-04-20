@@ -15,11 +15,8 @@ class PlayerInline(admin.StackedInline):
 
 class TeamAdmin(ModelAdmin):
     inlines = [PlayerInline]
-
-class MatchAdmin(ModelAdmin):
-    list_display = ['team_a', 'team_b', 'score_a', 'score_b', 'rank']
+    list_display = ['name', 'email', 'rank']
     readonly_fields = ['rank']
-
     def rank(self, obj):
         points = 0
         for m in Match.objects.filter(team_a=obj):
@@ -27,6 +24,10 @@ class MatchAdmin(ModelAdmin):
         for m in Match.objects.filter(team_b=obj):
             points += m.team_b - m.team_a
         return points
+
+
+class MatchAdmin(ModelAdmin):
+    list_display = ['team_a', 'team_b', 'score_a', 'score_b']
 
 
 admin.site.register(Post, PostAdmin)
