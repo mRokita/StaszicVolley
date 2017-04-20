@@ -19,12 +19,7 @@ class TeamAdmin(ModelAdmin):
     readonly_fields = ['rank']
 
     def rank(self, obj):
-        points = 0
-        for m in Match.objects.filter(team_a=obj):
-            points += m.score_a - m.score_b
-        for m in Match.objects.filter(team_b=obj):
-            points += m.score_b - m.score_a
-        return points
+        return obj.get_rank()
 
 
 class MatchAdmin(ModelAdmin):

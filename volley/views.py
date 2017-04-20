@@ -19,7 +19,7 @@ class ActivitiesView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ActivitiesView, self).get_context_data(**kwargs)
         context['activities_active'] = True
-        context['posts'] = Post.objects.all()
+        context['posts'] = Post.objects.all().order_by('date_created')
         return context
 
 

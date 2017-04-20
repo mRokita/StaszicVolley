@@ -33,6 +33,14 @@ class Team(models.Model):
         verbose_name = _('Zespół')
         verbose_name_plural = _('Zespoły')
 
+    def get_rank(self):
+        points = 0
+        for m in Match.objects.filter(team_a=self):
+            points += m.score_a - m.score_b
+        for m in Match.objects.filter(team_b=self):
+            points += m.score_b - m.score_a
+        return points
+
     def __unicode__(self):
         return self.name
 
