@@ -17,12 +17,13 @@ class TeamAdmin(ModelAdmin):
     inlines = [PlayerInline]
     list_display = ['name', 'email', 'rank']
     readonly_fields = ['rank']
+
     def rank(self, obj):
         points = 0
         for m in Match.objects.filter(team_a=obj):
-            points += m.team_a - m.team_b
+            points += m.score_a - m.score_b
         for m in Match.objects.filter(team_b=obj):
-            points += m.team_b - m.team_a
+            points += m.score_b - m.score_a
         return points
 
 
