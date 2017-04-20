@@ -37,7 +37,8 @@ class RankingView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(RankingView, self).get_context_data(**kwargs)
-        context['teams'] = sorted(list(Team.objects.filter(verified=True)), key=lambda x: x.get_rank())
+        context['teams'] = sorted(list(Team.objects.filter(verified=True)), key=lambda x: -x.get_rank())
+        context['ranking_active'] = True
         return context
 
 
