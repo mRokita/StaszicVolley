@@ -74,14 +74,15 @@ class Post(models.Model):
     date_created = models.DateTimeField(verbose_name=_('Data utworzenia'))
     title = models.CharField(max_length = 200, verbose_name=_('Tytuł'))
     content = models.TextField(verbose_name=_('Treść'))
+
     class Meta:
         verbose_name = _('Post')
         verbose_name_plural = _('Posty')
 
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         if self.pk == None:
-            email = EmailMessage('staszic.volley - '+self.title, self.content+'\n\nPozdrawiamy,\nZespół volley.staszic', to=[t.email for t in Team.objects.all()], from_email='volley@staszic.waw.pl')
-            #email.send()
+            email = EmailMessage('staszic.volley - '+self.title, self.content+'\n\nPozdrawiamy,\nZespół volley.staszic', bcc=[t.email for t in Team.objects.all()], from_email='volley@staszic.waw.pl')
+            email.send()
         super(Post, self).save(force_insert, force_update, *args, **kwargs)
 
     def __unicode__(self):
