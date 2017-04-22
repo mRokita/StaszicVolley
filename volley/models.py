@@ -14,6 +14,9 @@ class Tournament(models.Model):
         verbose_name = _('Turniej')
         verbose_name_plural = _('Turnieje')
 
+    def __unicode__(self):
+        return self.title
+
 
 class Player(models.Model):
     SCHOOL_CHOICES = (
